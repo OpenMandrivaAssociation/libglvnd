@@ -15,12 +15,12 @@
 
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
-Version:	1.0.0
+Version:	1.1.0
 Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
-Source0:	https://github.com/NVIDIA/libglvnd/archive/%{name}-%{version}.tar.gz
+Source0:	https://github.com/NVIDIA/libglvnd/releases/download/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:	python-libxml2
 BuildRequires:	pkgconfig(glproto)
 BuildRequires:	pkgconfig(x11)
@@ -133,15 +133,9 @@ initially, has file conflicts with them).
 %build
 %global optflags %{optflags} -Wstrict-aliasing=0
 autoreconf -vif
-#Only enable asm on x86 arches for now
-#https://github.com/NVIDIA/libglvnd/issues/116
 %configure \
 	--disable-static \
-%ifarch %{ix86} x86_64
 	--enable-asm \
-%else
-	--disable-asm \
-%endif
 	--enable-tls
 
 %make
