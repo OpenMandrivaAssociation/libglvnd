@@ -8,15 +8,18 @@
 %define libopengl %mklibname opengl %{major}
 %define devname %mklibname glvnd -d
 
-# Don't apply library packaging policy here as we don't link with these libraries
-%define libname_egl %mklibname glvnd-egl
-%define libname_gles %mklibname glvnd-gles
-%define libname_glx %mklibname glvnd-glx
+%define libEGL %mklibname EGL 1
+%define libGLdispatch %mklibname GLdispatch 0
+%define libGLESv1 %mklibname GLESv1_CM 1
+%define libGLESv2 %mklibname GLESv2 2
+%define libGL %mklibname GL 1
+%define libGLX %mklibname GLX 0
+%define libOpenGL %mklibname OpenGL 0
 
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.1.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
@@ -40,80 +43,102 @@ arbitrating OpenGL API calls between multiple vendors on a per-screen basis.
 %dir %{_datadir}/egl/egl_external_platform.d/
 
 #----------------------------------------------------------------------------
+%package -n %{libEGL}
+Summary:	LibEGL wrapper from libglvnd
+Recommends:	mesa-libEGL%{?_isa}
 
-%package -n %{libgldispatch}
-Summary:	Main shared library for libglvnd
-Group:		System/Libraries
-Requires:	%{name}
+%description -n %{libEGL}
+LibEGL wrapper from libglvnd
 
-%description -n %{libgldispatch}
-Main shared library for libglvnd.
+%files -n %{libEGL}
+%{_libdir}/libEGL.so.1*
 
-%files -n %{libgldispatch}
-%{_libdir}/libGLdispatch.so.%{major}*
-
-#----------------------------------------------------------------------------
-
-%package -n %{libopengl}
-Summary:	OpenGL support for libglvnd
-Group:		System/Libraries
-Requires:	%{name}
-
-%description -n %{libopengl}
-libOpenGL is the common dispatch interface for the workstation OpenGL API.
-
-%files -n %{libopengl}
-%{_libdir}/libOpenGL.so.%{major}*
 
 #----------------------------------------------------------------------------
+%package -n %{libGLdispatch}
+Summary:	LibGL dispatcher from libglvnd
+Requires:	%{libGL} = %{EVRD}
 
-%package -n %{libname_egl}
-Summary:	EGL support for libglvnd
-Group:		System/Libraries
-Requires:	%{name}
-Provides:	glvnd-egl = %{EVRD}
+%description -n %{libGLdispatch}
+LibGL dispatcher from libglvnd
 
-%description -n %{libname_egl}
-libEGL are the common dispatch interface for the EGL API.
+%files -n %{libGLdispatch}
+%{_libdir}/libGLdispatch.so.0*
 
-%files -n %{libname_egl}
-%{_libdir}/%{name}/libEGL.so.1*
 
 #----------------------------------------------------------------------------
+%package -n %{libGLESv1}
+Summary:	LibGLESv1 wrapper from libglvnd
+Recommends:	mesa-libGLESv1%{?_isa}
+%rename %{_lib}glesv1_1
 
-%package -n %{libname_gles}
-Summary:	GLES support for libglvnd
-Group:		System/Libraries
-Requires:	%{name}
-Provides:	glvnd-gles = %{EVRD}
+%description -n %{libGLESv1}
+LibGLESv1 wrapper from libglvnd
 
-%description -n %{libname_gles}
-libGLES are the common dispatch interface for the GLES API.
+%files -n %{libGLESv1}
+%{_libdir}/libGLESv1_CM.so.1*
 
-%files -n %{libname_gles}
-%{_libdir}/%{name}/libGLESv1_CM.so.1*
-%{_libdir}/%{name}/libGLESv2.so.2*
 
 #----------------------------------------------------------------------------
+%package -n %{libGLESv2}
+Summary:	LibGLESv2 wrapper from libglvnd
+Recommends:	mesa-libGLESv2%{?_isa}
+%rename %{_lib}glesv2_2
 
-%package -n %{libname_glx}
-Summary:	GLX support for libglvnd
-Group:		System/Libraries
-Requires:	%{name}
-Provides:	glvnd-glx = %{EVRD}
+%description -n %{libGLESv2}
+LibGLESv2 wrapper from libglvnd
 
-%description -n %{libname_glx}
-libGL and libGLX are the common dispatch interface for the GLX API.
+%files -n %{libGLESv2}
+%{_libdir}/libGLESv2.so.2*
 
-%files -n %{libname_glx}
-%{_libdir}/%{name}/libGL.so.1*
-%{_libdir}/%{name}/libGLX.so.0*
+
+#----------------------------------------------------------------------------
+%package -n %{libGL}
+Summary:	LibGL wrapper from libglvnd
+Recommends:	mesa-libGL%{?_isa}
+
+%description -n %{libGL}
+LibGL wrapper from libglvnd
+
+%files -n %{libGL}
+%{_libdir}/libGL.so.1*
+
+
+#----------------------------------------------------------------------------
+%package -n %{libGLX}
+Summary:	LibGLX wrapper from libglvnd
+Recommends:	mesa-libGL%{?_isa}
+
+%description -n %{libGLX}
+LibGLX wrapper from libglvnd
+
+%files -n %{libGLX}
+%{_libdir}/libGLX.so.0*
+
+
+#----------------------------------------------------------------------------
+%package -n %{libOpenGL}
+Summary:	OpenGL wrapper from libglvnd
+
+%description -n %{libOpenGL}
+OpenGL wrapper from libglvnd
+
+%files -n %{libOpenGL}
+%{_libdir}/libOpenGL.so.0*
+
 
 #----------------------------------------------------------------------------
 
 %package -n %{devname}
 Summary:	Development files for %{name}
 Group:		Development/C
+Requires:	%{libEGL} = %{EVRD}
+Requires:	%{libGLdispatch} = %{EVRD}
+Requires:	%{libGLESv1} = %{EVRD}
+Requires:	%{libGLESv2} = %{EVRD}
+Requires:	%{libGL} = %{EVRD}
+Requires:	%{libGLX} = %{EVRD}
+Requires:	%{libOpenGL} = %{EVRD}
 
 %description -n %{devname}
 This package is a bootstrap trick for Mesa, which wants to build against
@@ -124,6 +149,12 @@ initially, has file conflicts with them).
 %dir %{_includedir}/glvnd
 %{_includedir}/glvnd/*.h
 %{_libdir}/pkgconfig/*.pc
+%{_libdir}/libEGL.so
+%{_libdir}/libGLdispatch.so
+%{_libdir}/libGLX.so
+%{_libdir}/libGL.so
+%{_libdir}/libOpenGL.so
+
 
 #----------------------------------------------------------------------------
 
@@ -143,18 +174,13 @@ autoreconf -vif
 %install
 %makeinstall_std
 
-# Kill development symlinks, we use Mesa instead
-rm -rf %{buildroot}%{_libdir}/*.so
-
-# Avoid conflict with mesa-libGL
-mkdir -p %{buildroot}%{_libdir}/%{name}
-for l in libEGL libGL libGLX libGLESv1_CM libGLESv2 ; do
-  mv %{buildroot}%{_libdir}/${l}.so* \
-    %{buildroot}%{_libdir}/%{name}
-done
-
 # Create directory layout
 mkdir -p %{buildroot}%{_sysconfdir}/glvnd/egl_vendor.d
 mkdir -p %{buildroot}%{_datadir}/glvnd/egl_vendor.d
 mkdir -p %{buildroot}%{_sysconfdir}/egl/egl_external_platform.d
 mkdir -p %{buildroot}%{_datadir}/egl/egl_external_platform.d
+
+# *.so symlinks are useless because the headers live
+# in mesa anyway -- let's put the *.so files with the headers.
+rm -f	%{buildroot}%{_libdir}/libGLESv1_CM.so \
+	%{buildroot}%{_libdir}/libGLESv2.so
