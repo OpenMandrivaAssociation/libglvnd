@@ -19,7 +19,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.1.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
@@ -96,6 +96,8 @@ LibGLESv2 wrapper from libglvnd
 %package -n %{libGL}
 Summary:	LibGL wrapper from libglvnd
 Recommends:	mesa-libGL%{?_isa}
+%define oldgl %mklibname gl 1
+%rename %{oldgl}
 
 %description -n %{libGL}
 LibGL wrapper from libglvnd
