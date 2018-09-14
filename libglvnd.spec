@@ -46,7 +46,8 @@ arbitrating OpenGL API calls between multiple vendors on a per-screen basis.
 %package -n %{libEGL}
 Summary:	LibEGL wrapper from libglvnd
 Recommends:	mesa-libEGL%{?_isa}
-Provides:	libglvnd-egl
+Provides:	%{name}-egl
+Requires:	%{name} = %{EVRD}
 
 %description -n %{libEGL}
 LibEGL wrapper from libglvnd
@@ -59,7 +60,8 @@ LibEGL wrapper from libglvnd
 %package -n %{libGLdispatch}
 Summary:	LibGL dispatcher from libglvnd
 Requires:	%{libGL} = %{EVRD}
-Provides:	libglvnd-GLdispatch
+Provides:	%{name}-GLdispatch
+Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLdispatch}
 LibGL dispatcher from libglvnd
@@ -73,7 +75,8 @@ LibGL dispatcher from libglvnd
 Summary:	LibGLESv1 wrapper from libglvnd
 Recommends:	mesa-libGLESv1%{?_isa}
 %rename %{_lib}glesv1_1
-Provides:	libglvnd-GLESv1_CM
+Provides:	%{name}-GLESv1_CM
+Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLESv1}
 LibGLESv1 wrapper from libglvnd
@@ -87,7 +90,8 @@ LibGLESv1 wrapper from libglvnd
 Summary:	LibGLESv2 wrapper from libglvnd
 Recommends:	mesa-libGLESv2%{?_isa}
 %rename %{_lib}glesv2_2
-Provides:	libglvnd-GLESv2
+Provides:	%{name}-GLESv2
+Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLESv2}
 LibGLESv2 wrapper from libglvnd
@@ -102,7 +106,8 @@ Summary:	LibGL wrapper from libglvnd
 Recommends:	mesa-libGL%{?_isa}
 %define oldgl %mklibname gl 1
 %rename %{oldgl}
-Provides:	libglvnd-GL
+Provides:	%{name}-GL
+Requires:	%{name} = %{EVRD}
 
 %description -n %{libGL}
 LibGL wrapper from libglvnd
@@ -115,7 +120,8 @@ LibGL wrapper from libglvnd
 %package -n %{libGLX}
 Summary:	LibGLX wrapper from libglvnd
 Recommends:	mesa-libGL%{?_isa}
-Provides:	libglvnd-GLX
+Provides:	%{name}-GLX
+Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLX}
 LibGLX wrapper from libglvnd
@@ -127,7 +133,8 @@ LibGLX wrapper from libglvnd
 #----------------------------------------------------------------------------
 %package -n %{libOpenGL}
 Summary:	OpenGL wrapper from libglvnd
-Provides:	libglvnd-OpenGL
+Provides:	%{name}-OpenGL
+Requires:	%{name} = %{EVRD}
 
 %description -n %{libOpenGL}
 OpenGL wrapper from libglvnd
@@ -141,6 +148,7 @@ OpenGL wrapper from libglvnd
 %package -n %{devname}
 Summary:	Development files for %{name}
 Group:		Development/C
+Requires:	%{name} = %{EVRD}
 Requires:	%{libEGL} = %{EVRD}
 Requires:	%{libGLdispatch} = %{EVRD}
 Requires:	%{libGLESv1} = %{EVRD}
