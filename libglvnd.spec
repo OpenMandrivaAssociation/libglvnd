@@ -19,7 +19,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.1.0
-Release:	3
+Release:	4
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
@@ -46,6 +46,7 @@ arbitrating OpenGL API calls between multiple vendors on a per-screen basis.
 %package -n %{libEGL}
 Summary:	LibEGL wrapper from libglvnd
 Recommends:	mesa-libEGL%{?_isa}
+Provides:	libglvnd-egl
 
 %description -n %{libEGL}
 LibEGL wrapper from libglvnd
@@ -58,6 +59,7 @@ LibEGL wrapper from libglvnd
 %package -n %{libGLdispatch}
 Summary:	LibGL dispatcher from libglvnd
 Requires:	%{libGL} = %{EVRD}
+Provides:	libglvnd-GLdispatch
 
 %description -n %{libGLdispatch}
 LibGL dispatcher from libglvnd
@@ -71,6 +73,7 @@ LibGL dispatcher from libglvnd
 Summary:	LibGLESv1 wrapper from libglvnd
 Recommends:	mesa-libGLESv1%{?_isa}
 %rename %{_lib}glesv1_1
+Provides:	libglvnd-GLESv1_CM
 
 %description -n %{libGLESv1}
 LibGLESv1 wrapper from libglvnd
@@ -84,6 +87,7 @@ LibGLESv1 wrapper from libglvnd
 Summary:	LibGLESv2 wrapper from libglvnd
 Recommends:	mesa-libGLESv2%{?_isa}
 %rename %{_lib}glesv2_2
+Provides:	libglvnd-GLESv2
 
 %description -n %{libGLESv2}
 LibGLESv2 wrapper from libglvnd
@@ -98,6 +102,7 @@ Summary:	LibGL wrapper from libglvnd
 Recommends:	mesa-libGL%{?_isa}
 %define oldgl %mklibname gl 1
 %rename %{oldgl}
+Provides:	libglvnd-GL
 
 %description -n %{libGL}
 LibGL wrapper from libglvnd
@@ -110,6 +115,7 @@ LibGL wrapper from libglvnd
 %package -n %{libGLX}
 Summary:	LibGLX wrapper from libglvnd
 Recommends:	mesa-libGL%{?_isa}
+Provides:	libglvnd-GLX
 
 %description -n %{libGLX}
 LibGLX wrapper from libglvnd
@@ -121,6 +127,7 @@ LibGLX wrapper from libglvnd
 #----------------------------------------------------------------------------
 %package -n %{libOpenGL}
 Summary:	OpenGL wrapper from libglvnd
+Provides:	libglvnd-OpenGL
 
 %description -n %{libOpenGL}
 OpenGL wrapper from libglvnd
