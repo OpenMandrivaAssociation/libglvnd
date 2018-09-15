@@ -19,7 +19,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.1.0
-Release:	4
+Release:	5
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
@@ -156,6 +156,8 @@ Requires:	%{libGLESv2} = %{EVRD}
 Requires:	%{libGL} = %{EVRD}
 Requires:	%{libGLX} = %{EVRD}
 Requires:	%{libOpenGL} = %{EVRD}
+# Pull in Mesa for OpenGL headers
+Requires:	pkgconfig(gl)
 
 %description -n %{devname}
 This package is a bootstrap trick for Mesa, which wants to build against
@@ -170,6 +172,8 @@ initially, has file conflicts with them).
 %{_libdir}/libGLdispatch.so
 %{_libdir}/libGLX.so
 %{_libdir}/libGL.so
+%{_libdir}/libGLESv1_CM.so
+%{_libdir}/libGLESv2.so
 %{_libdir}/libOpenGL.so
 
 
@@ -196,8 +200,3 @@ mkdir -p %{buildroot}%{_sysconfdir}/glvnd/egl_vendor.d
 mkdir -p %{buildroot}%{_datadir}/glvnd/egl_vendor.d
 mkdir -p %{buildroot}%{_sysconfdir}/egl/egl_external_platform.d
 mkdir -p %{buildroot}%{_datadir}/egl/egl_external_platform.d
-
-# *.so symlinks are useless because the headers live
-# in mesa anyway -- let's put the *.so files with the headers.
-rm -f	%{buildroot}%{_libdir}/libGLESv1_CM.so \
-	%{buildroot}%{_libdir}/libGLESv2.so
