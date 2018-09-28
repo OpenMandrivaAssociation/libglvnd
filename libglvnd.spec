@@ -19,7 +19,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.1.0
-Release:	5
+Release:	6
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
@@ -45,7 +45,7 @@ arbitrating OpenGL API calls between multiple vendors on a per-screen basis.
 #----------------------------------------------------------------------------
 %package -n %{libEGL}
 Summary:	LibEGL wrapper from libglvnd
-Recommends:	mesa-libEGL%{?_isa}
+Requires:	mesa-libEGL%{?_isa} >= 18.2.1
 Provides:	%{name}-egl
 Requires:	%{name} = %{EVRD}
 
@@ -73,7 +73,8 @@ LibGL dispatcher from libglvnd
 #----------------------------------------------------------------------------
 %package -n %{libGLESv1}
 Summary:	LibGLESv1 wrapper from libglvnd
-Recommends:	mesa-libGLESv1%{?_isa}
+Requires:	mesa-libGLESv1%{?_isa} >= 18.2.1
+Requires:	mesa-libEGL%{?_isa} >= 18.2.1
 %rename %{_lib}glesv1_1
 Provides:	%{name}-GLESv1_CM
 Requires:	%{name} = %{EVRD}
@@ -88,7 +89,8 @@ LibGLESv1 wrapper from libglvnd
 #----------------------------------------------------------------------------
 %package -n %{libGLESv2}
 Summary:	LibGLESv2 wrapper from libglvnd
-Recommends:	mesa-libGLESv2%{?_isa}
+Requires:	mesa-libGLESv2%{?_isa} >= 18.2.1
+Requires:	mesa-libEGL%{?_isa} >= 18.2.1
 %rename %{_lib}glesv2_2
 Provides:	%{name}-GLESv2
 Requires:	%{name} = %{EVRD}
@@ -103,7 +105,7 @@ LibGLESv2 wrapper from libglvnd
 #----------------------------------------------------------------------------
 %package -n %{libGL}
 Summary:	LibGL wrapper from libglvnd
-Recommends:	mesa-libGL%{?_isa}
+Requires:	mesa-libGL%{?_isa} >= 18.2.1
 %define oldgl %mklibname gl 1
 %rename %{oldgl}
 Provides:	%{name}-GL
@@ -119,7 +121,7 @@ LibGL wrapper from libglvnd
 #----------------------------------------------------------------------------
 %package -n %{libGLX}
 Summary:	LibGLX wrapper from libglvnd
-Recommends:	mesa-libGL%{?_isa}
+Requires:	mesa-libGL%{?_isa} >= 18.2.1
 Provides:	%{name}-GLX
 Requires:	%{name} = %{EVRD}
 
@@ -180,7 +182,7 @@ initially, has file conflicts with them).
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %global optflags %{optflags} -Wstrict-aliasing=0
@@ -190,10 +192,10 @@ autoreconf -vif
 	--enable-asm \
 	--enable-tls
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 # Create directory layout
 mkdir -p %{buildroot}%{_sysconfdir}/glvnd/egl_vendor.d
