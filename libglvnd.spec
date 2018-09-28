@@ -73,7 +73,6 @@ LibGL dispatcher from libglvnd
 #----------------------------------------------------------------------------
 %package -n %{libGLESv1}
 Summary:	LibGLESv1 wrapper from libglvnd
-Requires:	mesa-libGLESv1%{?_isa} >= 18.2.1
 Requires:	mesa-libEGL%{?_isa} >= 18.2.1
 %rename %{_lib}glesv1_1
 Provides:	%{name}-GLESv1_CM
@@ -89,7 +88,6 @@ LibGLESv1 wrapper from libglvnd
 #----------------------------------------------------------------------------
 %package -n %{libGLESv2}
 Summary:	LibGLESv2 wrapper from libglvnd
-Requires:	mesa-libGLESv2%{?_isa} >= 18.2.1
 Requires:	mesa-libEGL%{?_isa} >= 18.2.1
 %rename %{_lib}glesv2_2
 Provides:	%{name}-GLESv2
