@@ -3,6 +3,7 @@
 
 %define _disable_ld_as_needed 1
 %global optflags %{optflags} -O3 -Wstrict-aliasing=0 -fuse-ld=gold
+%global ldflags %{ldflags} -fuse-ld=gold
 
 %define major 0
 %define libgldispatch %mklibname gldispatch %{major}
