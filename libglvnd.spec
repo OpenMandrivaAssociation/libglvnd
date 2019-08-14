@@ -19,7 +19,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.1.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
@@ -183,7 +183,7 @@ initially, has file conflicts with them).
 %autosetup -p1
 
 %build
-%global optflags %{optflags} -Wstrict-aliasing=0
+%global optflags %{optflags} -O3 -Wstrict-aliasing=0
 autoreconf -vif
 %configure \
 	--disable-static \
