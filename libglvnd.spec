@@ -2,6 +2,7 @@
 %global __requires_exclude_from %{_libdir}/%{name}
 
 %define _disable_ld_as_needed 1
+%global optflags %{optflags} -O3 -Wstrict-aliasing=0 -fuse.ld=gold
 
 %define major 0
 %define libgldispatch %mklibname gldispatch %{major}
@@ -183,7 +184,6 @@ initially, has file conflicts with them).
 %autosetup -p1
 
 %build
-%global optflags %{optflags} -O3 -Wstrict-aliasing=0
 autoreconf -vif
 %configure \
 	--disable-static \
