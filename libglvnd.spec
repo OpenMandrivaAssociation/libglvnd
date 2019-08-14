@@ -50,7 +50,7 @@ Provides:	%{name}-egl
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libEGL}
-LibEGL wrapper from libglvnd
+LibEGL wrapper from libglvnd.
 
 %files -n %{libEGL}
 %{_libdir}/libEGL.so.1*
@@ -64,7 +64,7 @@ Provides:	%{name}-GLdispatch
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLdispatch}
-LibGL dispatcher from libglvnd
+LibGL dispatcher from libglvnd.
 
 %files -n %{libGLdispatch}
 %{_libdir}/libGLdispatch.so.0*
@@ -79,7 +79,7 @@ Provides:	%{name}-GLESv1_CM
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLESv1}
-LibGLESv1 wrapper from libglvnd
+LibGLESv1 wrapper from libglvnd.
 
 %files -n %{libGLESv1}
 %{_libdir}/libGLESv1_CM.so.1*
@@ -94,7 +94,7 @@ Provides:	%{name}-GLESv2
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLESv2}
-LibGLESv2 wrapper from libglvnd
+LibGLESv2 wrapper from libglvnd.
 
 %files -n %{libGLESv2}
 %{_libdir}/libGLESv2.so.2*
@@ -110,7 +110,7 @@ Provides:	%{name}-GL
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libGL}
-LibGL wrapper from libglvnd
+LibGL wrapper from libglvnd.
 
 %files -n %{libGL}
 %{_libdir}/libGL.so.1*
@@ -124,7 +124,7 @@ Provides:	%{name}-GLX
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLX}
-LibGLX wrapper from libglvnd
+LibGLX wrapper from libglvnd.
 
 %files -n %{libGLX}
 %{_libdir}/libGLX.so.0*
@@ -137,7 +137,7 @@ Provides:	%{name}-OpenGL
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libOpenGL}
-OpenGL wrapper from libglvnd
+OpenGL wrapper from libglvnd.
 
 %files -n %{libOpenGL}
 %{_libdir}/libOpenGL.so.0*
