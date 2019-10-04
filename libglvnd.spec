@@ -169,6 +169,18 @@ initially, has file conflicts with them).
 %files -n %{devname}
 %dir %{_includedir}/glvnd
 %{_includedir}/glvnd/*.h
+%dir %{_includedir}/EGL
+%{_includedir}/EGL/*.h
+%dir %{_includedir}/GL
+%{_includedir}/GL/*.h
+%dir %{_includedir}/GLES
+%{_includedir}/GLES/*.h
+%dir %{_includedir}/GLES2
+%{_includedir}/GLES2/*.h
+%dir %{_includedir}/GLES3
+%{_includedir}/GLES3/*.h
+%dir %{_includedir}/KHR
+%{_includedir}/KHR/*.h
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/libEGL.so
 %{_libdir}/libGLdispatch.so
