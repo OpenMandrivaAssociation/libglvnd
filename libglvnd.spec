@@ -3,7 +3,8 @@
 
 %define _disable_ld_as_needed 1
 %global optflags %{optflags} -O3 -Wstrict-aliasing=0
-%global ldflags %{ldflags}
+# (tpg) 2019-10-04 https://github.com/NVIDIA/libglvnd/issues/191
+%global ldflags %{ldflags} -fuse-ld=gold
 
 %define major 0
 %define libgldispatch %mklibname gldispatch %{major}
