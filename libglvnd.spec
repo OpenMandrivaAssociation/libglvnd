@@ -3,7 +3,7 @@
 
 %define _disable_ld_as_needed 1
 %global optflags %{optflags} -O3 -Wstrict-aliasing=0
-%global ldflags %{ldflags} -fuse-ld=gold
+%global ldflags %{ldflags}
 
 %define major 0
 %define libgldispatch %mklibname gldispatch %{major}
@@ -20,8 +20,8 @@
 
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
-Version:	1.1.1
-Release:	2
+Version:	1.2.0
+Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
@@ -143,7 +143,6 @@ OpenGL wrapper from libglvnd.
 
 %files -n %{libOpenGL}
 %{_libdir}/libOpenGL.so.0*
-
 
 #----------------------------------------------------------------------------
 
