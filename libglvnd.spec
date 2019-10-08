@@ -22,7 +22,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.2.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
@@ -160,6 +160,8 @@ Requires:	%{libGLX} = %{EVRD}
 Requires:	%{libOpenGL} = %{EVRD}
 # Pull in Mesa for OpenGL headers
 Requires:	pkgconfig(gl)
+# EGL headers include <X11/xlib.h>
+Requires:	pkgconfig(x11)
 
 %description -n %{devname}
 This package is a bootstrap trick for Mesa, which wants to build against
