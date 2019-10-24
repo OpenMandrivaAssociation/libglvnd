@@ -24,11 +24,12 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.2.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
 Source0:	https://github.com/NVIDIA/libglvnd/releases/download/v%{version}/%{name}-%{version}.tar.gz
+Patch0:		195.patch
 BuildRequires:	python-libxml2
 BuildRequires:	pkgconfig(glproto)
 BuildRequires:	pkgconfig(x11)
