@@ -1,5 +1,22 @@
+From 51233cc52cbcbe25f8461830913c06f5b5bc9508 Mon Sep 17 00:00:00 2001
+From: Adam Jackson <ajax@redhat.com>
+Date: Thu, 17 Oct 2019 11:51:37 -0400
+Subject: [PATCH 2/4] egl: Sync with Khronos
+
+    commit de3a5e867d906a04a5c37ee0d89e7f01d3598eb9
+    Author: Ken Russell <kbrussel@alum.mit.edu>
+    Date:   Sat Oct 12 05:44:43 2019 -0700
+
+        Reserve enums 0x34A0..0x34AF for ANGLE project. (#93)
+
+Closes: https://gitlab.freedesktop.org/glvnd/libglvnd/issues/193
+---
+ include/EGL/eglplatform.h | 6 ++++++
+ src/generate/xml/egl.xml  | 7 +++++--
+ 2 files changed, 11 insertions(+), 2 deletions(-)
+
 diff --git a/include/EGL/eglplatform.h b/include/EGL/eglplatform.h
-index 29ab288b57eb6ccce0476f0e76c8b4da94225091..5ab49c1d4ea4564cc5d94a2a7ffa842ac6b3eeb1 100644
+index 29ab288..5ab49c1 100644
 --- a/include/EGL/eglplatform.h
 +++ b/include/EGL/eglplatform.h
 @@ -116,6 +116,12 @@ typedef intptr_t EGLNativeDisplayType;
@@ -16,7 +33,7 @@ index 29ab288b57eb6ccce0476f0e76c8b4da94225091..5ab49c1d4ea4564cc5d94a2a7ffa842a
  
  /* X11 (tentative)  */
 diff --git a/src/generate/xml/egl.xml b/src/generate/xml/egl.xml
-index c27f1726b677f311d792a136e86c5e01ae467e5f..6bc2ea2886aaf628d9741a7de2629bd8e38f37c8 100644
+index c27f172..6bc2ea2 100644
 --- a/src/generate/xml/egl.xml
 +++ b/src/generate/xml/egl.xml
 @@ -1002,6 +1002,9 @@
@@ -40,3 +57,6 @@ index c27f1726b677f311d792a136e86c5e01ae467e5f..6bc2ea2886aaf628d9741a7de2629bd8
      </enums>
  
      <enums namespace="EGL" start="0x8F70" end="0x8F7F" vendor="HI" comment="For Mark Callow, Khronos bug 4055. Shared with GL.">
+-- 
+2.24.0
+

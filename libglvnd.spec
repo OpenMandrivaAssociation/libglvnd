@@ -24,13 +24,17 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.2.0
-Release:	4
+Release:	5
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
 Source0:	https://github.com/NVIDIA/libglvnd/releases/download/v%{version}/%{name}-%{version}.tar.gz
-Patch0:		update-gl-h-to-match-mesa.patch
-Patch1:		egl-sync-with-khronos.patch
+# (tpg) patches from upstream git
+Patch0:		0000-include-install-GL-headers-when-GL-is-enabled.patch
+Patch1:		0001-Add-a-configure-option-to-disable-glesv1-or-glesv2.patch
+Patch2:		0002-egl-Sync-with-Khronos.patch
+Patch3:		0003-Update-GL-gl.h-to-match-Mesa.patch
+Patch4:		0004-Provide-an-empty-GLES3-gl3ext.h-header.patch
 BuildRequires:	python-libxml2
 BuildRequires:	pkgconfig(glproto)
 BuildRequires:	pkgconfig(x11)
