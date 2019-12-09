@@ -24,6 +24,7 @@ License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
 Source0:	https://github.com/NVIDIA/libglvnd/releases/download/v%{version}/%{name}-%{version}.tar.gz
+Patch0:		libglvnd-1.3.0-fix-linking.patch
 BuildRequires:	meson
 BuildRequires:	python-libxml2
 BuildRequires:	pkgconfig(glproto)

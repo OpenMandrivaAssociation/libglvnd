@@ -1,0 +1,12 @@
+diff -Naur libglvnd-1.3.0/tests/dummy/meson.build libglvnd-1.3.0.tpg/tests/dummy/meson.build
+--- libglvnd-1.3.0/tests/dummy/meson.build	2019-12-05 21:44:43.000000000 +0000
++++ libglvnd-1.3.0.tpg/tests/dummy/meson.build	2019-12-09 11:23:30.733028337 +0000
+@@ -39,7 +39,7 @@
+     ['GLX_dummy.c'],
+     include_directories : [inc_dispatch, inc_glx, inc_include],
+     link_with: [libpatchentrypoints],
+-    dependencies : [idep_trace, idep_utils_misc],
++    dependencies : [idep_trace, idep_utils_misc, dep_x11],
+   )
+ 
+   # The ICD loader expects to load a .so.0, but meson generates the .X.Y.Z
