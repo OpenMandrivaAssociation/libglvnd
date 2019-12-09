@@ -23,18 +23,13 @@
 
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
-Version:	1.2.0
-Release:	5
+Version:	1.3.0
+Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
 Source0:	https://github.com/NVIDIA/libglvnd/releases/download/v%{version}/%{name}-%{version}.tar.gz
-# (tpg) patches from upstream git
-Patch0:		0000-include-install-GL-headers-when-GL-is-enabled.patch
-Patch1:		0001-Add-a-configure-option-to-disable-glesv1-or-glesv2.patch
-Patch2:		0002-egl-Sync-with-Khronos.patch
-Patch3:		0003-Update-GL-gl.h-to-match-Mesa.patch
-Patch4:		0004-Provide-an-empty-GLES3-gl3ext.h-header.patch
+BuildRequires:	meson
 BuildRequires:	python-libxml2
 BuildRequires:	pkgconfig(glproto)
 BuildRequires:	pkgconfig(x11)
@@ -207,16 +202,16 @@ initially, has file conflicts with them).
 %autosetup -p1
 
 %build
-autoreconf -vif
-%configure \
-	--disable-static \
-	--enable-asm \
-	--enable-tls
+%meson \
+	-Dasm=enabled \
+	-Dx11=enabled \
+	-Dglx=enabled \
+	-Dtls=enabled
 
-%make_build
+%meson_build
 
 %install
-%make_install
+%meson_install
 
 # Create directory layout
 mkdir -p %{buildroot}%{_sysconfdir}/glvnd/egl_vendor.d
