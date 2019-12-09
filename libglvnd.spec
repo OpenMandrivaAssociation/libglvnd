@@ -1,12 +1,7 @@
 %global __provides_exclude_from %{_libdir}/%{name}
 %global __requires_exclude_from %{_libdir}/%{name}
 
-%define _disable_ld_as_needed 1
 %global optflags %{optflags} -O3 -Wstrict-aliasing=0
-# (tpg) 2019-10-04 https://github.com/NVIDIA/libglvnd/issues/191
-%ifnarch %{riscv}
-%global ldflags %{ldflags} -fuse-ld=gold
-%endif
 
 %define major 0
 %define libgldispatch %mklibname gldispatch %{major}
