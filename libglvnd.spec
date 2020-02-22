@@ -18,13 +18,12 @@
 
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
-Version:	1.3.0
+Version:	1.3.1
 Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		https://github.com/NVIDIA/libglvnd
 Source0:	https://github.com/NVIDIA/libglvnd/releases/download/v%{version}/%{name}-%{version}.tar.gz
-Patch0:		libglvnd-1.3.0-fix-linking.patch
 BuildRequires:	meson
 BuildRequires:	python-libxml2
 BuildRequires:	pkgconfig(glproto)
@@ -190,7 +189,6 @@ initially, has file conflicts with them).
 %{_libdir}/libGLESv1_CM.so
 %{_libdir}/libGLESv2.so
 %{_libdir}/libOpenGL.so
-
 
 #----------------------------------------------------------------------------
 
