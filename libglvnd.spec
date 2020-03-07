@@ -22,8 +22,8 @@ Version:	1.3.1
 Release:	1
 License:	MIT
 Group:		System/Libraries
-Url:		https://github.com/NVIDIA/libglvnd
-Source0:	https://github.com/NVIDIA/libglvnd/releases/download/v%{version}/%{name}-%{version}.tar.gz
+Url:            https://gitlab.freedesktop.org/glvnd/libglvnd
+Source0:        https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v%{version}/%{name}-v%{version}.tar.bz2
 BuildRequires:	meson
 BuildRequires:	python-libxml2
 BuildRequires:	pkgconfig(glproto)
@@ -193,7 +193,7 @@ initially, has file conflicts with them).
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-v%{version}
 
 %build
 %meson \
