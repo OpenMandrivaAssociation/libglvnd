@@ -19,7 +19,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.3.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:            https://gitlab.freedesktop.org/glvnd/libglvnd
@@ -47,7 +47,7 @@ arbitrating OpenGL API calls between multiple vendors on a per-screen basis.
 %package -n %{libEGL}
 Summary:	LibEGL wrapper from libglvnd
 Requires:	mesa-libEGL%{?_isa} >= 18.2.1
-Provides:	%{name}-egl
+Provides:	%{name}-egl%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libEGL}
@@ -56,12 +56,11 @@ LibEGL wrapper from libglvnd.
 %files -n %{libEGL}
 %{_libdir}/libEGL.so.1*
 
-
 #----------------------------------------------------------------------------
 %package -n %{libGLdispatch}
 Summary:	LibGL dispatcher from libglvnd
 Requires:	%{libGL} = %{EVRD}
-Provides:	%{name}-GLdispatch
+Provides:	%{name}-GLdispatch%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLdispatch}
@@ -70,13 +69,12 @@ LibGL dispatcher from libglvnd.
 %files -n %{libGLdispatch}
 %{_libdir}/libGLdispatch.so.0*
 
-
 #----------------------------------------------------------------------------
 %package -n %{libGLESv1}
 Summary:	LibGLESv1 wrapper from libglvnd
 Requires:	mesa-libEGL%{?_isa} >= 18.2.1
 %rename %{_lib}glesv1_1
-Provides:	%{name}-GLESv1_CM
+Provides:	%{name}-GLESv1_CM%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLESv1}
@@ -85,13 +83,12 @@ LibGLESv1 wrapper from libglvnd.
 %files -n %{libGLESv1}
 %{_libdir}/libGLESv1_CM.so.1*
 
-
 #----------------------------------------------------------------------------
 %package -n %{libGLESv2}
 Summary:	LibGLESv2 wrapper from libglvnd
 Requires:	mesa-libEGL%{?_isa} >= 18.2.1
 %rename %{_lib}glesv2_2
-Provides:	%{name}-GLESv2
+Provides:	%{name}-GLESv2%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLESv2}
@@ -100,14 +97,13 @@ LibGLESv2 wrapper from libglvnd.
 %files -n %{libGLESv2}
 %{_libdir}/libGLESv2.so.2*
 
-
 #----------------------------------------------------------------------------
 %package -n %{libGL}
 Summary:	LibGL wrapper from libglvnd
 Requires:	mesa-libGL%{?_isa} >= 18.2.1
 %define oldgl %mklibname gl 1
 %rename %{oldgl}
-Provides:	%{name}-GL
+Provides:	%{name}-GL%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libGL}
@@ -116,12 +112,11 @@ LibGL wrapper from libglvnd.
 %files -n %{libGL}
 %{_libdir}/libGL.so.1*
 
-
 #----------------------------------------------------------------------------
 %package -n %{libGLX}
 Summary:	LibGLX wrapper from libglvnd
 Requires:	mesa-libGL%{?_isa} >= 18.2.1
-Provides:	%{name}-GLX
+Provides:	%{name}-GLX%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libGLX}
@@ -130,11 +125,10 @@ LibGLX wrapper from libglvnd.
 %files -n %{libGLX}
 %{_libdir}/libGLX.so.0*
 
-
 #----------------------------------------------------------------------------
 %package -n %{libOpenGL}
 Summary:	OpenGL wrapper from libglvnd
-Provides:	%{name}-OpenGL
+Provides:	%{name}-OpenGL%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libOpenGL}
@@ -149,13 +143,13 @@ OpenGL wrapper from libglvnd.
 Summary:	Development files for %{name}
 Group:		Development/C
 Requires:	%{name} = %{EVRD}
-Requires:	%{libEGL} = %{EVRD}
-Requires:	%{libGLdispatch} = %{EVRD}
-Requires:	%{libGLESv1} = %{EVRD}
-Requires:	%{libGLESv2} = %{EVRD}
-Requires:	%{libGL} = %{EVRD}
-Requires:	%{libGLX} = %{EVRD}
-Requires:	%{libOpenGL} = %{EVRD}
+Requires:	%{libEGL}%{?_isa} = %{EVRD}
+Requires:	%{libGLdispatch}%{?_isa} = %{EVRD}
+Requires:	%{libGLESv1}%{?_isa} = %{EVRD}
+Requires:	%{libGLESv2}%{?_isa} = %{EVRD}
+Requires:	%{libGL}%{?_isa} = %{EVRD}
+Requires:	%{libGLX}%{?_isa} = %{EVRD}
+Requires:	%{libOpenGL}%{?_isa} = %{EVRD}
 # Pull in Mesa for OpenGL headers
 Requires:	pkgconfig(gl)
 # EGL headers include <X11/xlib.h>
