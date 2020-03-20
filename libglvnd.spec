@@ -22,8 +22,8 @@ Version:	1.3.1
 Release:	2
 License:	MIT
 Group:		System/Libraries
-Url:            https://gitlab.freedesktop.org/glvnd/libglvnd
-Source0:        https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v%{version}/%{name}-v%{version}.tar.bz2
+Url:		https://gitlab.freedesktop.org/glvnd/libglvnd
+Source0:	https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v%{version}/%{name}-v%{version}.tar.bz2
 BuildRequires:	meson
 BuildRequires:	python-libxml2
 BuildRequires:	pkgconfig(glproto)
