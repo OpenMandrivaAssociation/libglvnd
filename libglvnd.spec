@@ -194,7 +194,7 @@ initially, has file conflicts with them).
 %ifnarch riscv
 	-Dasm=enabled \
 %else
-	-Dasm=dsiabled \
+	-Dasm=disabled \
 %endif
 	-Dx11=enabled \
 	-Dglx=enabled \
