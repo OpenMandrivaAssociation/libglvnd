@@ -19,7 +19,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.3.1
-Release:	5
+Release:	6
 License:	MIT
 Group:		System/Libraries
 Url:		https://gitlab.freedesktop.org/glvnd/libglvnd
@@ -46,8 +46,9 @@ arbitrating OpenGL API calls between multiple vendors on a per-screen basis.
 #----------------------------------------------------------------------------
 %package -n %{libEGL}
 Summary:	LibEGL wrapper from libglvnd
-Requires:	mesa-libEGL%{?_isa} >= 18.2.1
+Requires:	(mesa-libEGL%{?_isa} >= 18.2.1 or mesa-libEGL >= 18.2.1)
 Provides:	%{name}-egl%{?_isa} = %{EVRD}
+Provides:	%{name}-egl = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libEGL}
@@ -72,7 +73,7 @@ LibGL dispatcher from libglvnd.
 #----------------------------------------------------------------------------
 %package -n %{libGLESv1}
 Summary:	LibGLESv1 wrapper from libglvnd
-Requires:	mesa-libEGL >= 18.2.1
+Requires:	(mesa-libEGL%{?_isa} >= 18.2.1 or mesa-libEGL >= 18.2.1)
 %rename %{_lib}glesv1_1
 Provides:	%{name}-GLESv1_CM%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
@@ -86,7 +87,7 @@ LibGLESv1 wrapper from libglvnd.
 #----------------------------------------------------------------------------
 %package -n %{libGLESv2}
 Summary:	LibGLESv2 wrapper from libglvnd
-Requires:	mesa-libEGL%{?_isa} >= 18.2.1
+Requires:	(mesa-libEGL%{?_isa} >= 18.2.1 or mesa-libEGL >= 18.2.1)
 %rename %{_lib}glesv2_2
 Provides:	%{name}-GLESv2%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
@@ -100,7 +101,7 @@ LibGLESv2 wrapper from libglvnd.
 #----------------------------------------------------------------------------
 %package -n %{libGL}
 Summary:	LibGL wrapper from libglvnd
-Requires:	mesa-libGL%{?_isa} >= 18.2.1
+Requires:	(mesa-libGL%{?_isa} >= 18.2.1 or mesa-libGL >= 18.2.1)
 %define oldgl %mklibname gl 1
 %rename %{oldgl}
 Provides:	%{name}-GL%{?_isa} = %{EVRD}
@@ -115,7 +116,7 @@ LibGL wrapper from libglvnd.
 #----------------------------------------------------------------------------
 %package -n %{libGLX}
 Summary:	LibGLX wrapper from libglvnd
-Requires:	mesa-libGL%{?_isa} >= 18.2.1
+Requires:	(mesa-libGL%{?_isa} >= 18.2.1 or mesa-libGL >= 18.2.1)
 Provides:	%{name}-GLX%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
@@ -129,6 +130,7 @@ LibGLX wrapper from libglvnd.
 %package -n %{libOpenGL}
 Summary:	OpenGL wrapper from libglvnd
 Provides:	%{name}-OpenGL%{?_isa} = %{EVRD}
+Provides:	%{name}-GL = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
 %description -n %{libOpenGL}
