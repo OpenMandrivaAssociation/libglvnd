@@ -19,7 +19,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.3.1
-Release:	2
+Release:	4
 License:	MIT
 Group:		System/Libraries
 Url:		https://gitlab.freedesktop.org/glvnd/libglvnd
@@ -143,13 +143,13 @@ OpenGL wrapper from libglvnd.
 Summary:	Development files for %{name}
 Group:		Development/C
 Requires:	%{name} = %{EVRD}
-Requires:	%{libEGL}%{?_isa} = %{EVRD}
-Requires:	%{libGLdispatch}%{?_isa} = %{EVRD}
-Requires:	%{libGLESv1}%{?_isa} = %{EVRD}
-Requires:	%{libGLESv2}%{?_isa} = %{EVRD}
-Requires:	%{libGL}%{?_isa} = %{EVRD}
-Requires:	%{libGLX}%{?_isa} = %{EVRD}
-Requires:	%{libOpenGL}%{?_isa} = %{EVRD}
+Requires:	%{libEGL} = %{EVRD}
+Requires:	%{libGLdispatch} = %{EVRD}
+Requires:	%{libGLESv1} = %{EVRD}
+Requires:	%{libGLESv2} = %{EVRD}
+Requires:	%{libGL} = %{EVRD}
+Requires:	%{libGLX} = %{EVRD}
+Requires:	%{libOpenGL} = %{EVRD}
 # Pull in Mesa for OpenGL headers
 Requires:	pkgconfig(gl)
 # EGL headers include <X11/xlib.h>
