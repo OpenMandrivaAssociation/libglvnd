@@ -19,7 +19,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.3.1
-Release:	4
+Release:	5
 License:	MIT
 Group:		System/Libraries
 Url:		https://gitlab.freedesktop.org/glvnd/libglvnd
@@ -72,7 +72,7 @@ LibGL dispatcher from libglvnd.
 #----------------------------------------------------------------------------
 %package -n %{libGLESv1}
 Summary:	LibGLESv1 wrapper from libglvnd
-Requires:	mesa-libEGL%{?_isa} >= 18.2.1
+Requires:	mesa-libEGL >= 18.2.1
 %rename %{_lib}glesv1_1
 Provides:	%{name}-GLESv1_CM%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
@@ -191,7 +191,11 @@ initially, has file conflicts with them).
 
 %build
 %meson \
+%ifnarch riscv
 	-Dasm=enabled \
+%else
+	-Dasm=dsiabled \
+%endif
 	-Dx11=enabled \
 	-Dglx=enabled \
 	-Dtls=enabled
