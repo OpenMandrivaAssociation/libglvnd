@@ -4,8 +4,6 @@
 %global optflags %{optflags} -O3 -Wstrict-aliasing=0
 
 %define major 0
-%define libgldispatch %mklibname gldispatch %{major}
-%define libopengl %mklibname opengl %{major}
 %define devname %mklibname glvnd -d
 
 %define libEGL %mklibname EGL 1
@@ -29,6 +27,7 @@
 %define lib32GL libGL1
 %define lib32GLX libGLX0
 %define lib32OpenGL libOpenGL0
+%define dev32name libglvnd-devel
 
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
