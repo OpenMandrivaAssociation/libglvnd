@@ -16,10 +16,24 @@
 %define libGLX %mklibname GLX 0
 %define libOpenGL %mklibname OpenGL 0
 
+# libglvnd is used by wine
+%ifarch %{x86_64}
+%bcond_without compat32
+%else
+%bcond_with compat32
+%endif
+%define lib32EGL libEGL1
+%define lib32GLdispatch libGLdispatch0
+%define lib32GLESv1 libGLESv1_CM1
+%define lib32GLESv2 libGLESv2_2
+%define lib32GL libGL1
+%define lib32GLX libGLX0
+%define lib32OpenGL libOpenGL0
+
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.3.1
-Release:	7
+Release:	8
 License:	MIT
 Group:		System/Libraries
 Url:		https://gitlab.freedesktop.org/glvnd/libglvnd
@@ -29,6 +43,10 @@ BuildRequires:	python-libxml2
 BuildRequires:	pkgconfig(glproto)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xext)
+%if %{with compat32}
+BuildRequires:	devel(libX11)
+BuildRequires:	devel(libXext)
+%endif
 
 %description
 libglvnd is an implementation of the vendor-neutral dispatch layer for
@@ -188,10 +206,130 @@ initially, has file conflicts with them).
 
 #----------------------------------------------------------------------------
 
+%if %{with compat32}
+#----------------------------------------------------------------------------
+%package -n %{lib32EGL}
+Summary:	LibEGL wrapper from libglvnd (32-bit)
+Requires:	%{name} = %{EVRD}
+
+%description -n %{lib32EGL}
+LibEGL wrapper from libglvnd.
+
+%files -n %{lib32EGL}
+%{_prefix}/lib/libEGL.so.1*
+
+#----------------------------------------------------------------------------
+%package -n %{lib32GLdispatch}
+Summary:	LibGL dispatcher from libglvnd (32-bit)
+Requires:	%{lib32GL} = %{EVRD}
+
+%description -n %{lib32GLdispatch}
+LibGL dispatcher from libglvnd.
+
+%files -n %{lib32GLdispatch}
+%{_prefix}/lib/libGLdispatch.so.0*
+
+#----------------------------------------------------------------------------
+%package -n %{lib32GLESv1}
+Summary:	LibGLESv1 wrapper from libglvnd (32-bit)
+Requires:	%{name} = %{EVRD}
+
+%description -n %{lib32GLESv1}
+LibGLESv1 wrapper from libglvnd.
+
+%files -n %{lib32GLESv1}
+%{_prefix}/lib/libGLESv1_CM.so.1*
+
+#----------------------------------------------------------------------------
+%package -n %{lib32GLESv2}
+Summary:	LibGLESv2 wrapper from libglvnd (32-bit)
+Requires:	%{name} = %{EVRD}
+
+%description -n %{lib32GLESv2}
+LibGLESv2 wrapper from libglvnd.
+
+%files -n %{lib32GLESv2}
+%{_prefix}/lib/libGLESv2.so.2*
+
+#----------------------------------------------------------------------------
+%package -n %{lib32GL}
+Summary:	LibGL wrapper from libglvnd (32-bit)
+Requires:	%{name} = %{EVRD}
+
+%description -n %{lib32GL}
+LibGL wrapper from libglvnd.
+
+%files -n %{lib32GL}
+%{_prefix}/lib/libGL.so.1*
+
+#----------------------------------------------------------------------------
+%package -n %{lib32GLX}
+Summary:	LibGLX wrapper from libglvnd (32-bit)
+Requires:	%{name} = %{EVRD}
+
+%description -n %{lib32GLX}
+LibGLX wrapper from libglvnd.
+
+%files -n %{lib32GLX}
+%{_prefix}/lib/libGLX.so.0*
+
+#----------------------------------------------------------------------------
+%package -n %{lib32OpenGL}
+Summary:	OpenGL wrapper from libglvnd (32-bit)
+Requires:	%{name} = %{EVRD}
+
+%description -n %{lib32OpenGL}
+OpenGL wrapper from libglvnd.
+
+%files -n %{lib32OpenGL}
+%{_prefix}/lib/libOpenGL.so.0*
+
+#----------------------------------------------------------------------------
+
+%package -n %{dev32name}
+Summary:	Development files for %{name} (32-bit)
+Group:		Development/C
+Requires:	%{name} = %{EVRD}
+Requires:	%{lib32EGL} = %{EVRD}
+Requires:	%{lib32GLdispatch} = %{EVRD}
+Requires:	%{lib32GLESv1} = %{EVRD}
+Requires:	%{lib32GLESv2} = %{EVRD}
+Requires:	%{lib32GL} = %{EVRD}
+Requires:	%{lib32GLX} = %{EVRD}
+Requires:	%{lib32OpenGL} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
+# Pull in Mesa for OpenGL headers
+Requires:	pkgconfig(gl)
+# EGL headers include <X11/xlib.h>
+Requires:	devel(libX11)
+
+%description -n %{dev32name}
+This package is a bootstrap trick for Mesa, which wants to build against
+the libglvnd headers but does not link against any of its libraries (and,
+initially, has file conflicts with them).
+
+%files -n %{dev32name}
+%{_prefix}/lib/pkgconfig/*.pc
+%{_prefix}/lib/libEGL.so
+%{_prefix}/lib/libGLdispatch.so
+%{_prefix}/lib/libGLX.so
+%{_prefix}/lib/libGL.so
+%{_prefix}/lib/libGLESv1_CM.so
+%{_prefix}/lib/libGLESv2.so
+%{_prefix}/lib/libOpenGL.so
+%endif
+
 %prep
 %autosetup -p1 -n %{name}-v%{version}
 
-%build
+%if %{with compat32}
+%meson32 \
+	-Dasm=disabled \
+	-Dx11=enabled \
+	-Dglx=enabled \
+	-Dtls=enabled
+%endif
+
 %meson \
 %ifnarch riscv
 	-Dasm=enabled \
@@ -202,9 +340,17 @@ initially, has file conflicts with them).
 	-Dglx=enabled \
 	-Dtls=enabled
 
+
+%build
+%if %{with compat32}
+%ninja_build -C build32
+%endif
 %meson_build
 
 %install
+%if %{with compat32}
+%ninja_install -C build32
+%endif
 %meson_install
 
 # Create directory layout
