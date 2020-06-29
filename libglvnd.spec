@@ -43,10 +43,14 @@ BuildRequires:	pkgconfig(glproto)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xcb)
+BuildRequires:	pkgconfig(xau)
+BuildRequires:	pkgconfig(xdmcp)
 %if %{with compat32}
 BuildRequires:	devel(libX11)
 BuildRequires:	devel(libXext)
 BuildRequires:	devel(libxcb)
+BuildRequires:	devel(libXau)
+BuildRequires:	devel(libXdmcp)
 %endif
 
 %description
