@@ -42,9 +42,11 @@ BuildRequires:	python-libxml2
 BuildRequires:	pkgconfig(glproto)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xext)
+BuildRequires:	pkgconfig(xcb)
 %if %{with compat32}
 BuildRequires:	devel(libX11)
 BuildRequires:	devel(libXext)
+BuildRequires:	devel(libxcb)
 %endif
 
 %description
