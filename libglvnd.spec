@@ -31,7 +31,7 @@
 
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
-Version:	1.3.3
+Version:	1.3.4
 Release:	1
 License:	MIT
 Group:		System/Libraries
