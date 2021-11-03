@@ -32,7 +32,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.3.4
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		https://gitlab.freedesktop.org/glvnd/libglvnd
@@ -336,7 +336,7 @@ initially, has file conflicts with them).
 %endif
 
 %meson \
-%ifnarch riscv
+%ifnarch %{riscv}
 	-Dasm=enabled \
 %else
 	-Dasm=disabled \
@@ -344,7 +344,6 @@ initially, has file conflicts with them).
 	-Dx11=enabled \
 	-Dglx=enabled \
 	-Dtls=enabled
-
 
 %build
 %if %{with compat32}
