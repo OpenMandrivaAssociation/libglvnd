@@ -332,7 +332,7 @@ initially, has file conflicts with them).
 	-Dasm=disabled \
 	-Dx11=enabled \
 	-Dglx=enabled \
-	-Dtls=enabled
+	-Dtls=true
 %endif
 
 %meson \
