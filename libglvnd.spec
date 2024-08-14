@@ -32,7 +32,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.7.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		https://gitlab.freedesktop.org/glvnd/libglvnd
@@ -52,6 +52,9 @@ BuildRequires:	devel(libxcb)
 BuildRequires:	devel(libXau)
 BuildRequires:	devel(libXdmcp)
 %endif
+
+%patchlist
+https://gitlab.freedesktop.org/glvnd/libglvnd/-/commit/cc263984adffd5fff0aa1191f2cc5d72ceb55795.patch
 
 %description
 libglvnd is an implementation of the vendor-neutral dispatch layer for
@@ -175,8 +178,6 @@ Requires:	%{libGLESv2} = %{EVRD}
 Requires:	%{libGL} = %{EVRD}
 Requires:	%{libGLX} = %{EVRD}
 Requires:	%{libOpenGL} = %{EVRD}
-# Pull in Mesa for OpenGL headers
-Requires:	pkgconfig(gl)
 # EGL headers include <X11/xlib.h>
 Requires:	pkgconfig(x11)
 
