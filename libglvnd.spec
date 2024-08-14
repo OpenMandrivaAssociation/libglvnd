@@ -14,6 +14,8 @@
 %define libGLX %mklibname GLX 0
 %define libOpenGL %mklibname OpenGL 0
 
+%bcond_without bootstrap
+
 # libglvnd is used by wine
 %ifarch %{x86_64}
 %bcond_without compat32
@@ -72,7 +74,9 @@ arbitrating OpenGL API calls between multiple vendors on a per-screen basis.
 #----------------------------------------------------------------------------
 %package -n %{libEGL}
 Summary:	LibEGL wrapper from libglvnd
+%if ! %{with bootstrap}
 Requires:	(mesa-libEGL%{?_isa} >= 18.2.1 or mesa-libEGL >= 18.2.1)
+%endif
 Provides:	%{name}-egl%{?_isa} = %{EVRD}
 Provides:	%{name}-egl = %{EVRD}
 Requires:	%{name} = %{EVRD}
@@ -99,7 +103,9 @@ LibGL dispatcher from libglvnd.
 #----------------------------------------------------------------------------
 %package -n %{libGLESv1}
 Summary:	LibGLESv1 wrapper from libglvnd
+%if ! %{with bootstrap}
 Requires:	(mesa-libEGL%{?_isa} >= 18.2.1 or mesa-libEGL >= 18.2.1)
+%endif
 %rename %{_lib}glesv1_1
 Provides:	%{name}-GLESv1_CM%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
@@ -113,7 +119,9 @@ LibGLESv1 wrapper from libglvnd.
 #----------------------------------------------------------------------------
 %package -n %{libGLESv2}
 Summary:	LibGLESv2 wrapper from libglvnd
+%if ! %{with bootstrap}
 Requires:	(mesa-libEGL%{?_isa} >= 18.2.1 or mesa-libEGL >= 18.2.1)
+%endif
 %rename %{_lib}glesv2_2
 Provides:	%{name}-GLESv2%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
@@ -127,7 +135,9 @@ LibGLESv2 wrapper from libglvnd.
 #----------------------------------------------------------------------------
 %package -n %{libGL}
 Summary:	LibGL wrapper from libglvnd
+%if ! %{with bootstrap}
 Requires:	(mesa-libGL%{?_isa} >= 18.2.1 or mesa-libGL >= 18.2.1)
+%endif
 %define oldgl %mklibname gl 1
 %rename %{oldgl}
 Provides:	%{name}-GL%{?_isa} = %{EVRD}
@@ -142,7 +152,9 @@ LibGL wrapper from libglvnd.
 #----------------------------------------------------------------------------
 %package -n %{libGLX}
 Summary:	LibGLX wrapper from libglvnd
+%if ! %{with bootstrap}
 Requires:	(mesa-libGL%{?_isa} >= 18.2.1 or mesa-libGL >= 18.2.1)
+%endif
 Provides:	%{name}-GLX%{?_isa} = %{EVRD}
 Requires:	%{name} = %{EVRD}
 
