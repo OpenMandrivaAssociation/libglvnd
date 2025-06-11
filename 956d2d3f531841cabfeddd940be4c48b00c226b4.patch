@@ -1,0 +1,42 @@
+From 956d2d3f531841cabfeddd940be4c48b00c226b4 Mon Sep 17 00:00:00 2001
+From: Sergei Trofimovich <slyich@gmail.com>
+Date: Tue, 14 Nov 2023 17:25:53 +0000
+Subject: [PATCH] configure.ac: enable 64-bit file API where availablie
+
+Without the change `scandir()` fails on `i686-unknown-linux` if
+`egl_vendor.d` contents contains files with inodes that overflow 32-bit
+values. In my case it is `btrfs`:
+
+    $ ls -i egl_vendor.d/
+    5053988166 50_mesa.json
+
+On `libEGL.so` I see the following symbol change (as reported by `nm`):
+
+    -         U fopen@GLIBC_2.1
+    -         U fstat@GLIBC_2.33
+    -         U scandir@GLIBC_2.0
+    +         U fopen64@GLIBC_2.1
+    +         U fstat64@GLIBC_2.33
+    +         U scandir64@GLIBC_2.2
+
+The fix allowed to run 32-bit `es2gears_wayland` from `mesa-demos`
+without failures.
+---
+ configure.ac | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configure.ac b/configure.ac
+index 98c4175..e3f4fec 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -13,6 +13,7 @@ AC_CANONICAL_SYSTEM
+ dnl Add an --enable-debug option
+ AX_CHECK_ENABLE_DEBUG(no, DEBUG)
+ 
++AC_SYS_LARGEFILE
+ AC_USE_SYSTEM_EXTENSIONS
+ 
+ AM_INIT_AUTOMAKE([1.11 foreign silent-rules])
+-- 
+GitLab
+

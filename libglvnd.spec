@@ -14,7 +14,7 @@
 %define libGLX %mklibname GLX 0
 %define libOpenGL %mklibname OpenGL 0
 
-%bcond_with bootstrap
+%bcond_without bootstrap
 
 # libglvnd is used by wine
 %ifarch %{x86_64}
@@ -34,7 +34,7 @@
 Summary:	The GL Vendor-Neutral Dispatch library
 Name:		libglvnd
 Version:	1.7.0
-Release:	3
+Release:	4
 License:	MIT
 Group:		System/Libraries
 Url:		https://gitlab.freedesktop.org/glvnd/libglvnd
@@ -57,6 +57,8 @@ BuildRequires:	devel(libXdmcp)
 
 %patchlist
 https://gitlab.freedesktop.org/glvnd/libglvnd/-/commit/cc263984adffd5fff0aa1191f2cc5d72ceb55795.patch
+https://gitlab.freedesktop.org/glvnd/libglvnd/-/commit/ce2d1ebf93c8d72f31ae401a525a51cf24bb0665.patch
+https://gitlab.freedesktop.org/glvnd/libglvnd/-/commit/956d2d3f531841cabfeddd940be4c48b00c226b4.patch
 
 %description
 libglvnd is an implementation of the vendor-neutral dispatch layer for
